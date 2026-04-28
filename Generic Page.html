@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>SVK — Generic Page template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'svk-green': { 50:'#f4f7e9',100:'#e5ecc8',200:'#cfdba0',300:'#a8c079',400:'#78a158',500:'#3c8a4b',600:'#2e6f3c',700:'#255a31',800:'#1e4628',900:'#163420' },
+          'svk-orange': { 50:'#fdf4ec',100:'#fae1cb',200:'#f6c293',400:'#ee8c3b',500:'#e5741f',600:'#c45d14',700:'#9a4911' },
+          'svk-bg':'#fbfaf7','svk-surface':'#ffffff','svk-surface-2':'#f4f2ec',
+          'svk-border':'#e6e3db','svk-border-s':'#cfcabe',
+          'svk-ink':{ 900:'#1a1f1c',800:'#262b27',600:'#4a524b',500:'#6a7168',400:'#8e9389' },
+        },
+        fontFamily: {
+          serif: ['"Source Serif 4"','"Source Serif Pro"','Charter','Georgia','serif'],
+          sans:  ['Manrope','ui-sans-serif','system-ui','sans-serif'],
+          mono:  ['"JetBrains Mono"','ui-monospace','monospace'],
+        },
+        maxWidth: { 'screen-xl': '1240px' },
+        boxShadow: {
+          'svk-xs':'0 1px 2px rgba(22,52,32,0.06)',
+          'svk-sm':'0 1px 2px rgba(22,52,32,0.05), 0 2px 6px rgba(22,52,32,0.05)',
+          'svk-md':'0 2px 4px rgba(22,52,32,0.06), 0 8px 20px rgba(22,52,32,0.07)',
+          'svk-lg':'0 6px 16px rgba(22,52,32,0.08), 0 18px 40px rgba(22,52,32,0.10)',
+        },
+        letterSpacing: { 'svk-tight':'-0.018em' },
+      }
+    }
+  };
+</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style type="text/tailwindcss">
+  @layer components {
+    .container-svk { @apply max-w-screen-xl mx-auto px-6; }
+    .btn { @apply inline-flex items-center gap-2 font-semibold rounded-md transition-colors duration-150 whitespace-nowrap; }
+    .btn-primary { @apply btn bg-svk-green-600 text-white hover:bg-svk-green-700 px-5 py-2.5 text-sm; }
+    .btn-secondary { @apply btn bg-white text-svk-green-700 border border-svk-border-s hover:bg-svk-green-50 px-5 py-2.5 text-sm; }
+    .btn-ghost { @apply btn text-svk-green-700 hover:bg-svk-green-50 px-3.5 py-1.5 text-xs; }
+    .btn-accent { @apply btn bg-svk-orange-500 text-white hover:bg-svk-orange-600 px-5 py-2.5 text-sm; }
+    .btn-sm { @apply px-3.5 py-1.5 text-xs; }
+    .btn-lg { @apply px-6 py-3.5 text-base; }
+
+    .eyebrow { @apply text-[11px] font-semibold tracking-[0.14em] uppercase; }
+    .card { @apply bg-white border border-svk-border rounded-[10px] overflow-hidden; }
+    .input { @apply font-sans text-sm w-full px-3 py-2.5 bg-white border border-svk-border rounded-md text-svk-ink-900 placeholder:text-svk-ink-500 focus:border-svk-green-500 outline-none; }
+
+    .prose-svk p { @apply text-[16px] leading-[1.72] text-svk-ink-800 mb-5; }
+    .prose-svk h2 { @apply font-serif text-[30px] font-semibold text-svk-ink-900 tracking-svk-tight mt-12 mb-4 leading-[1.15]; }
+    .prose-svk h3 { @apply font-serif text-[22px] font-semibold text-svk-ink-900 tracking-svk-tight mt-8 mb-3; }
+    .prose-svk ul { @apply list-disc pl-6 mb-5 text-svk-ink-800 leading-[1.7]; }
+    .prose-svk li { @apply mb-1.5; }
+    .prose-svk blockquote { @apply font-serif text-[22px] text-svk-ink-800 italic border-l-[2px] border-svk-green-500 pl-5 my-8; }
+  }
+  html, body { background: #fbfaf7; color: #262b27; font-family: Manrope, ui-sans-serif, system-ui, sans-serif; }
+  .link-arrow { display: inline-flex; align-items: center; gap: 4px; transition: gap 200ms; }
+  .link-arrow:hover { gap: 8px; }
+  ::selection { background: #cfdba0; color: #163420; }
+</style>
+
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#255a31"/>
+  <rect x="30" y="22" width="40" height="56" rx="3" fill="#fbfaf7"/>
+  <rect x="36" y="30" width="28" height="3" fill="#255a31"/>
+  <rect x="36" y="36" width="20" height="2" fill="#a8c079"/>
+  <rect x="36" y="44" width="28" height="14" fill="#cfdba0"/>
+  <rect x="36" y="62" width="28" height="2" fill="#cfcabe"/>
+  <rect x="36" y="66" width="22" height="2" fill="#cfcabe"/>
+  <rect x="36" y="70" width="26" height="2" fill="#cfcabe"/>
+</svg>
+</template>
+
+</head>
+<body class="bg-svk-bg text-svk-ink-800 font-sans antialiased">
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="shared/chrome.jsx"></script>
+<script type="text/babel" src="shared/data.jsx"></script>
+<script type="text/babel" src="shared/VariantA.jsx"></script>
+<script type="text/babel" src="shared/VariantB.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+const { useState } = React;
+
+function VariantFrame({ children }) {
+  // Constrain the page inside each artboard. Page content is 1240 container, but we
+  // render at 1440 to include chrome edges.
+  return (
+    <div className="bg-svk-bg">
+      <TopNav current="om" />
+      {children}
+      <Footer />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <DesignCanvas title="Generic Page — layout variations" initialZoom={0.55}>
+      <DCSection id="variants" title="Generic Page template">
+        <DCArtboard id="variant-a" label="A · Editorial Sidebar" width={1440} height={3400}>
+          <VariantFrame>
+            <GenericPageVariantA data={GENERIC_PAGE} />
+          </VariantFrame>
+        </DCArtboard>
+        <DCArtboard id="variant-b" label="B · Magazine Index" width={1440} height={3900}>
+          <VariantFrame>
+            <GenericPageVariantB data={GENERIC_PAGE} />
+          </VariantFrame>
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('app')).render(<App/>);
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+/* SVK globals — extracted from svk-web-3/app/globals.css */
+:root {
+  --svk-green-50: #f4f7e9;
+  --svk-green-100: #e5ecc8;
+  --svk-green-200: #cfdba0;
+  --svk-green-300: #a8c079;
+  --svk-green-400: #78a158;
+  --svk-green-500: #3c8a4b;
+  --svk-green-600: #2e6f3c;
+  --svk-green-700: #255a31;
+  --svk-green-800: #1e4628;
+  --svk-green-900: #163420;
+
+  --svk-orange-500: #e5741f;
+
+  --svk-bg: #fbfaf7;
+  --svk-surface: #ffffff;
+  --svk-surface-2: #f4f2ec;
+  --svk-border: #e6e3db;
+  --svk-border-strong: #cfcabe;
+
+  --svk-ink-900: #1a1f1c;
+  --svk-ink-800: #262b27;
+  --svk-ink-600: #4a524b;
+  --svk-ink-500: #6a7168;
+  --svk-ink-400: #8e9389;
+
+  --svk-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --svk-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --svk-dur: 200ms;
+  --focus-ring: 0 0 0 3px rgba(60, 138, 75, 0.35);
+}
+html, body { background: var(--svk-bg); color: var(--svk-ink-800); font-family: "Manrope", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+::selection { background: var(--svk-green-200); color: var(--svk-green-900); }
+*:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 6px; }
+
+.noise-bg { position: relative; }
+.noise-bg::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 14px 14px; pointer-events: none; }
+
+@keyframes fade-in-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in-up { animation: fade-in-up 360ms var(--svk-ease-out) both; }
+
+.card-hover { transition: transform var(--svk-dur) var(--svk-ease), box-shadow var(--svk-dur) var(--svk-ease), border-color var(--svk-dur) var(--svk-ease); }
+.card-hover:hover { transform: translateY(-2px); border-color: var(--svk-border-strong); }
+.link-arrow { display: inline-flex; align-items: center; gap: 4px; transition: gap var(--svk-dur) var(--svk-ease); }
+.link-arrow:hover { gap: 8px; }
+
+.leaflet-container { font-family: inherit; background: #f4f2ec; }
+.leaflet-popup-content-wrapper { border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+.leaflet-popup-content { margin: 14px 16px; }
+.leaflet-control-attribution { font-size: 10px; background: rgba(255,255,255,0.85) !important; }
